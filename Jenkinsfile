@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NETLIFY_PROJECT_ID = 'e9a6202c-e98c-4a16-906d-6590146965b1'
+        NETLIFY_SITE_ID = 'e9a6202c-e98c-4a16-906d-6590146965b1'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
     }
 
@@ -50,7 +50,7 @@ pipeline {
                 sh '''
                 npm install netlify-cli
                 node_modules/.bin/netlify --version
-                echo "project id: $NETLIFY_PROJECT_ID"
+                echo "project id: $NETLIFY_SITE_ID"
                  node_modules/.bin/netlify status
                 '''
             }
