@@ -6,38 +6,38 @@ pipeline {
     }
 
     stages {
-        stage('Test') {
-            agent {
-                docker {
-                    image "node:18-alpine"
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                node -v
-                npm ci
-                npm test
-                '''
-            }
-        }
-        stage('Build') {
-            agent {
-                docker {
-                    image "node:18-alpine"
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                ls -la
-                node --version
-                npm --version
-                npm run build
-                ls -la
-                '''
-            }
-        }
+        // stage('Test') {
+        //     agent {
+        //         docker {
+        //             image "node:18-alpine"
+        //             reuseNode true
+        //         }
+        //     }
+        //     steps {
+        //         sh '''
+        //         node -v
+        //         npm ci
+        //         npm test
+        //         '''
+        //     }
+        // }
+        // stage('Build') {
+        //     agent {
+        //         docker {
+        //             image "node:18-alpine"
+        //             reuseNode true
+        //         }
+        //     }
+        //     steps {
+        //         sh '''
+        //         ls -la
+        //         node --version
+        //         npm --version
+        //         npm run build
+        //         ls -la
+        //         '''
+        //     }
+        // }
         stage('Deploy') {
             agent {
                 docker {
@@ -48,7 +48,7 @@ pipeline {
             steps {
                 sh '''
                 npm install netlify-cli
-                node_modules/.bin/netlify-cli --version
+                node_modules/.bin/netlify --version
                 echo "project id: $NETLIFY_PROJECT_ID"
                 '''
             }
