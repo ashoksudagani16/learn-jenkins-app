@@ -40,7 +40,7 @@ pipeline {
                 '''
             }
         }
-         stage('Deploy staging') {
+        stage('Deploy staging') {
             agent {
                 docker {
                     image "node:18-alpine"
@@ -55,6 +55,11 @@ pipeline {
                 node_modules/.bin/netlify status
                 node_modules/.bin/netlify deploy --dir=build --no-build
                 '''
+            }
+        }
+         stage('Approval') {
+            steps {
+                input 'Ready to deploy ?'
             }
         }
         stage('Deploy prod') {
